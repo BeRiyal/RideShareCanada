@@ -1,8 +1,10 @@
-package com.example.ridesharecanada;
+package com.example.ridesharecanada.views;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.ridesharecanada.R;
 
 public class ChooseActivity extends AppCompatActivity {
 
