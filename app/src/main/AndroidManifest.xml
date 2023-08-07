@@ -13,19 +13,19 @@
         android:theme="@style/Theme.RideShareCanada"
         tools:targetApi="31">
         <activity
-            android:name=".views.RidesActivity"
+            android:name=".viewmodels.RidesActivity"
             android:exported="false" />
         <activity
-            android:name=".views.SearchRideActivity"
+            android:name=".viewmodels.SearchRideActivity"
             android:exported="false" />
         <activity
-            android:name=".views.ChooseActivity"
+            android:name=".viewmodels.ChooseActivity"
             android:exported="false" />
         <activity
-            android:name=".views.ForgotPasswordActivity"
+            android:name=".viewmodels.ForgotPasswordActivity"
             android:exported="false" />
         <activity
-            android:name=".views.RegistrationActivity"
+            android:name=".viewmodels.RegistrationActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -34,7 +34,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".views.MainActivity"
+            android:name=".viewmodels.MainActivity"
             android:exported="true" />
     </application>
 
