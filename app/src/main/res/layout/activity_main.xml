@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="mainViewModel"
+            type="com.example.ridesharecanada.viewmodel.MainActivityViewModel" />
+    </data>
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -78,10 +84,12 @@
             android:textColor="@color/black"
             android:layout_marginHorizontal="5dp"/>
         <TextView
+            android:onClick="@{() -> mainViewModel.ToRegistration()}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Signup"
             android:textColor="@color/black"
             android:layout_marginHorizontal="5dp"/>
-    s</LinearLayout>
+    </LinearLayout>
 </LinearLayout>
+</layout>

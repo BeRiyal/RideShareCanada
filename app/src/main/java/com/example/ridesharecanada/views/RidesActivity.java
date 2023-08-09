@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 import com.example.ridesharecanada.R;
 
-public class MainActivity extends AppCompatActivity {
+public class RidesActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

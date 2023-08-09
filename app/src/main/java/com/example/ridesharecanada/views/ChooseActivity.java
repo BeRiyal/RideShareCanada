@@ -1,4 +1,4 @@
-package com.example.ridesharecanada.viewmodels;
+package com.example.ridesharecanada.views;
 
 import androidx.appcompat.app.AppCompatActivity;
 
