@@ -1,24 +1,25 @@
-package com.example.ridesharecanada;
+package com.example.ridesharecanada.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class LoginBody {
+public class LoginRequest {
+
     @SerializedName("email")
     private String email;
 
     @SerializedName("password")
     private String password;
 
-    public LoginBody(String email, String password) {
+    public LoginRequest(String email, String password) {
         this.email = email;
         this.password = password;
     }
 
-    public String getEmail() {
+    public String getemail() {
         return email;
     }
 
-    public void setEmail(String email) {
+    public void setemail(String email) {
         this.email = email;
     }
 

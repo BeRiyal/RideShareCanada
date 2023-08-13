@@ -1,39 +1,55 @@
 package com.example.ridesharecanada.viewmodel;
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.ridesharecanada.LoginBody;
-import com.example.ridesharecanada.LoginResponse;
-import com.example.ridesharecanada.MainRepository;
+import com.example.ridesharecanada.IApiService;
+import com.example.ridesharecanada.model.LoginResponse;
+import com.example.ridesharecanada.model.LoginRequest;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivityViewModel extends ViewModel {
+    private static IApiService apiService;
     private MutableLiveData<Boolean> navigateToOtherActivity = new MutableLiveData<>();
-    private MutableLiveData<String> loginResponse = new MutableLiveData<>();
     private static MutableLiveData<Boolean> IfLogin = new MutableLiveData<>();
-    static MainRepository mainRepository;
     private Context context;
 
     public MainActivityViewModel(Context applicationContext) {
         this.context = applicationContext;
-        mainRepository = new MainRepository();
+        apiService = RetrofitClient.getInstance().create(IApiService.class);
     }
 
-    public static void login(String username, String password){
-        mainRepository.loginRemote(new LoginBody(username, password), new MainRepository.ILoginResponse() {
-            @Override
-            public void onResponse(LoginResponse loginResponse) {
-                IfLogin.setValue(true);
-            }
+    public static MutableLiveData<Boolean> login(String username, String password) {
+        LoginRequest loginRequest = new LoginRequest(username, password);
+
+        Call<LoginResponse> call = apiService.login(loginRequest);
+        call.enqueue(new Callback<LoginResponse>() {
 
             @Override
-            public void onFailure(Throwable t) {
-                IfLogin.setValue(false);
+            public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                if (response.isSuccessful()) {
+                    String responseBody = String.valueOf(response.code());
+                        IfLogin.setValue(true);
+                }else {
+                    IfLogin.setValue(false);
+                }
             }
-        });
+            @Override
+            public void onFailure(Call<LoginResponse> call, Throwable t) {
+
+                IfLogin.setValue(false);
+                //TODO: Handle failure
+            }
+
+            });
+        return IfLogin;
     }
 
 
@@ -45,7 +61,6 @@ public class MainActivityViewModel extends ViewModel {
         return IfLogin;
     }
     public void ToRegistration() {
-        // Perform some business logic
         navigateToOtherActivity.setValue(true); // Trigger navigation
     }
 }

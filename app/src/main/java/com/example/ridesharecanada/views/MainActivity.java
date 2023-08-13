@@ -7,10 +7,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
-import androidx.databinding.ViewDataBinding;
 
 
-import com.example.ridesharecanada.MainRepository;
 import com.example.ridesharecanada.R;
 import com.example.ridesharecanada.databinding.ActivityMainBinding;
 import com.example.ridesharecanada.viewmodel.MainActivityViewModel;
@@ -31,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         mainActivityViewModel.IfloginVar().observe(this,Success ->{
+            Log.d("Riyal", String.valueOf(Success));
             if (Success){
                 startActivity(new Intent(this, RegistrationActivity.class));
             }
