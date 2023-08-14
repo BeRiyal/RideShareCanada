@@ -1,15 +1,9 @@
-package com.example.ridesharecanada.viewmodel;
-import com.example.ridesharecanada.IApiService;
-import com.example.ridesharecanada.model.LoginResponse;
+package com.example.ridesharecanada.APIServices;
+
+import com.example.ridesharecanada.model.API.ApiResponse;
+import com.example.ridesharecanada.APIServices.LoginResponseDeserializer;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-
-import java.lang.reflect.Type;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -29,20 +23,12 @@ public class RetrofitClient {
                     .addInterceptor(loggingInterceptor)
                     .build();
 
+
             Gson gson = new GsonBuilder()
                     .setLenient()
-                    .registerTypeAdapter(LoginResponse.class, new JsonDeserializer<LoginResponse>() {
-                        @Override
-                        public LoginResponse deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-                            JsonObject jsonObject = json.getAsJsonObject();
-                            String token = jsonObject.get("token").getAsString();
-
-                            LoginResponse loginResponse = new LoginResponse();
-                            loginResponse.setToken(token);
-                            return loginResponse;
-                        }
-                    })
+                    .registerTypeAdapter(ApiResponse.class, new LoginResponseDeserializer())
                     .create();
+
 
 
             retrofit = new Retrofit.Builder()

@@ -11,6 +11,7 @@ import androidx.databinding.DataBindingUtil;
 
 import com.example.ridesharecanada.R;
 import com.example.ridesharecanada.databinding.ActivityMainBinding;
+import com.example.ridesharecanada.model.SharedPrefDataSource;
 import com.example.ridesharecanada.viewmodel.MainActivityViewModel;
 
 public class MainActivity extends AppCompatActivity {
@@ -23,20 +24,30 @@ public class MainActivity extends AppCompatActivity {
         binding.setMainViewModel(mainActivityViewModel);
         binding.setLifecycleOwner(this);
 
-        mainActivityViewModel.getNavigateToOtherActivity().observe(this, navigate -> {
+        SharedPrefDataSource.getInstance().init(getApplicationContext());
+
+//_____Check Login
+        mainActivityViewModel.CheckSessionvar().observe(this,session -> {
+            if (session.equals(true)){
+                startActivity(new Intent(this, SearchRideActivity.class));
+                finish();
+            }
+        });
+
+/*_____Intent trigger on value change of MutableLiveData of bool variables for intent
+       Patten of variables "To" <-Name of activity-> _____*/
+
+        mainActivityViewModel.ToRegistraionActivity().observe(this, navigate -> {
             if (navigate) {
                 startActivity(new Intent(this, RegistrationActivity.class));
             }
         });
-        mainActivityViewModel.IfloginVar().observe(this,Success ->{
-            Log.d("Riyal", String.valueOf(Success));
-            if (Success){
-                startActivity(new Intent(this, RegistrationActivity.class));
-            }
-            else {
-                Toast.makeText(this, "Errorrrrrrrr", Toast.LENGTH_LONG).show();
+        mainActivityViewModel.ToForgotPassActivity().observe(this,navigate ->{
+            if (navigate){
+                startActivity(new Intent(this,ForgotPasswordActivity.class));
             }
         });
+//_____Setting ClickListener
         binding.bLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
