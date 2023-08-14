@@ -1,13 +1,11 @@
 package com.example.ridesharecanada.views;
+
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
-
 
 import com.example.ridesharecanada.R;
 import com.example.ridesharecanada.databinding.ActivityMainBinding;
@@ -29,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
 //_____Check Login
         mainActivityViewModel.CheckSessionvar().observe(this,session -> {
             if (session.equals(true)){
-                startActivity(new Intent(this, SearchRideActivity.class));
+                startActivity(new Intent(this, ChooseActivity.class));
                 finish();
             }
         });
@@ -47,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(this,ForgotPasswordActivity.class));
             }
         });
+
 //_____Setting ClickListener
         binding.bLogin.setOnClickListener(new View.OnClickListener() {
             @Override

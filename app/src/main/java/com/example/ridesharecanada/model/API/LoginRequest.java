@@ -1,4 +1,4 @@
-package com.example.ridesharecanada.model;
+package com.example.ridesharecanada.model.API;
 
 import com.google.gson.annotations.SerializedName;
 

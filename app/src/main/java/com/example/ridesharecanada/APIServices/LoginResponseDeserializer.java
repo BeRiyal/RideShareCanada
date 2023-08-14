@@ -1,9 +1,7 @@
 package com.example.ridesharecanada.APIServices;
 
-import android.util.Log;
-
 import com.example.ridesharecanada.model.API.ApiResponse;
-import com.example.ridesharecanada.model.LoginResponse;
+import com.example.ridesharecanada.model.API.LoginResponse;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
