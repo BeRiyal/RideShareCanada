@@ -1,5 +1,6 @@
 package com.example.ridesharecanada.APIServices;
 
+import com.example.ridesharecanada.model.API.AddRideRequest;
 import com.example.ridesharecanada.model.API.ApiResponse;
 import com.example.ridesharecanada.model.API.LoginRequest;
 import com.example.ridesharecanada.model.API.LoginResponse;
@@ -15,7 +16,11 @@ public interface IApiService {
     @POST("/api/users/login")
     Call<ApiResponse<LoginResponse>> login(@Body LoginRequest request);
 
-//_____Registration
+    //_____Registration
     @POST("/api/users/add")
     Call<ApiResponse<RegisterResponse>> register(@Body RegisterRequest request);
+
+    //_____AddRide
+    @POST("/api/rides/add")
+    Call<ApiResponse<RegisterResponse>> addRide(@Body AddRideRequest request);
 }

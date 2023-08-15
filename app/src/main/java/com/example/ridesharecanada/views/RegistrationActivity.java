@@ -26,6 +26,7 @@ public class RegistrationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 RegistrationActivityViewModel.register(binding.etName.getText().toString(),binding.etEmail.getText().toString(),binding.etPassword.getText().toString());
+
             }
         });
 

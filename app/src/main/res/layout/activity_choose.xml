@@ -1,56 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:gravity="center"
-    android:padding="16dp"
-    android:background="@color/white"
-    android:weightSum="10">
-
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="chooseViewModel"
+            type="com.example.ridesharecanada.viewmodel.ChooseActivityViewModel" />
+    </data>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="5"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:orientation="vertical"
-        android:gravity="center">
+        android:gravity="center"
+        android:background="@color/white"
+        android:weightSum="10">
 
-        <ImageView
-            android:id="@+id/imgOptDriving"
-            android:layout_width="wrap_content"
-            android:layout_height="152dp"
-            android:layout_margin="10dp"
-            android:paddingHorizontal="80dp"
-            android:src="@drawable/logorsc"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Driving"
-            android:textSize="30dp"
-            android:textColor="@color/black"/>
+        <include layout="@layout/toobar" android:id="@+id/toolbar"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/imgOptDriving"
+                android:layout_width="wrap_content"
+                android:layout_height="152dp"
+                android:layout_margin="10dp"
+                android:paddingHorizontal="80dp"
+                android:src="@drawable/logorsc"
+                android:onClick="@{() -> chooseViewModel.ToAddRideActivity() }"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Driving"
+                android:textSize="30dp"
+                android:textColor="@color/black"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/imgOptRideing"
+                android:layout_width="wrap_content"
+                android:layout_height="152dp"
+                android:layout_margin="10dp"
+                android:paddingHorizontal="80dp"
+                android:src="@drawable/logorsc"
+                android:onClick="@{() -> chooseViewModel.ToSearchRideActivity() }"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Riding"
+                android:textSize="30dp"
+                android:textColor="@color/black"/>
+        </LinearLayout>
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="5"
-        android:orientation="vertical"
-        android:gravity="center">
-
-        <ImageView
-            android:id="@+id/imgOptRideing"
-            android:layout_width="wrap_content"
-            android:layout_height="152dp"
-            android:layout_margin="10dp"
-            android:paddingHorizontal="80dp"
-            android:src="@drawable/logorsc"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Riding"
-            android:textSize="30dp"
-            android:textColor="@color/black"/>
-    </LinearLayout>
-</LinearLayout>
+</layout>

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="AddRideViewModel"
+            type="com.example.ridesharecanada.viewmodel.AddRideViewModel" />
+    </data>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="16dp"
+        android:background="@drawable/bg2">
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="From"
+            android:layout_margin="10dp"
+            android:textColorHint="@color/black">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etFrom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/baseline_location_on_24"
+                android:drawablePadding="5dp"
+                android:drawableTint="@color/black"
+                android:inputType="text"
+                android:textColor="@color/black"
+                app:cornerRadius="10dp"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="To"
+            android:textColorHint="@color/black"
+            android:layout_margin="10dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etTo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/baseline_location_on_24"
+                android:drawablePadding="5dp"
+                android:drawableTint="@color/black"
+                android:inputType="text"
+                android:textColor="@color/black"
+                app:cornerRadius="10dp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="wrap_content"
+                android:layout_weight="5"
+                android:layout_height="wrap_content"
+                android:hint="Date"
+                android:textColorHint="@color/black"
+                android:layout_margin="10dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    app:cornerRadius="10dp"
+                    android:drawableStart="@drawable/baseline_date_range_24"
+                    android:drawableTint="@color/black"
+                    android:drawablePadding="5dp"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="wrap_content"
+            android:layout_weight="5"
+            android:layout_height="wrap_content"
+            android:hint="Time"
+            android:textColorHint="@color/black"
+            android:layout_margin="10dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                app:cornerRadius="10dp"
+                android:drawableStart="@drawable/baseline_access_time_24"
+                android:drawableTint="@color/black"
+                android:drawablePadding="5dp"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Available Seats"
+            android:textColorHint="@color/black"
+            android:layout_margin="10dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etSeat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/baseline_event_seat_24"
+                android:drawablePadding="5dp"
+                android:drawableTint="@color/black"
+                android:inputType="text"
+                android:textColor="@color/black"
+                app:cornerRadius="10dp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnAddRide"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add Ride"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/black"
+            android:elevation="4dp"
+            app:cornerRadius="10dp"
+            android:textSize="20dp"
+            android:layout_margin="10dp"/>
+</LinearLayout>
+</layout>

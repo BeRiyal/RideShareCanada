@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -15,26 +15,32 @@
         android:theme="@style/Theme.RideShareCanada"
         tools:targetApi="31">
         <activity
+            android:name=".views.DrawableBaseActivity"
+            android:exported="false" />
+        <activity
+            android:name=".views.AddRideActivity"
+            android:exported="false" />
+        <activity
+            android:name=".views.ChooseActivity"
+            android:exported="false" />
+        <activity
             android:name=".views.RidesActivity"
             android:exported="false" />
         <activity
             android:name=".views.SearchRideActivity"
             android:exported="false" />
         <activity
-            android:name=".views.ChooseActivity"
-            android:exported="false" />
-        <activity
             android:name=".views.ForgotPasswordActivity"
             android:exported="false" />
         <activity
             android:name=".views.RegistrationActivity"
-            android:exported="false">
-        </activity>
+            android:exported="false" />
         <activity
             android:name=".views.MainActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
