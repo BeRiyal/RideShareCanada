@@ -1,6 +1,7 @@
 package com.example.ridesharecanada.viewmodel;
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -9,9 +10,11 @@ import androidx.lifecycle.ViewModel;
 import com.example.ridesharecanada.APIServices.IApiService;
 import com.example.ridesharecanada.APIServices.RetrofitClient;
 import com.example.ridesharecanada.model.API.ApiResponse;
-import com.example.ridesharecanada.model.API.LoginResponse;
 import com.example.ridesharecanada.model.API.LoginRequest;
+import com.example.ridesharecanada.model.API.LoginResponse;
 import com.example.ridesharecanada.model.SharedPrefDataSource;
+import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -41,14 +44,26 @@ public class MainActivityViewModel extends ViewModel {
                 if (response.isSuccessful()) {
                     ApiResponse<LoginResponse> apiResponse = response.body();
                     if (apiResponse.isSuccess()) {
-                        LoginResponse loginResponse = apiResponse.getData();
-                        SharedPrefDataSource.getInstance().setLoginId(loginResponse.getToken());
-                        ToSearchActivity.setValue(true);
+                        String responseData = apiResponse.getData(); // Assuming apiResponse.getData() returns the JSON string
+
+                        Gson gson = new Gson();
+                        try {
+                            LoginResponse loginResponse = gson.fromJson(responseData, LoginResponse.class);
+                            Log.d("Riyal", String.valueOf(loginResponse));
+                            SharedPrefDataSource.getInstance().setLoginId(loginResponse.getToken());
+                            ToSearchActivity.setValue(true);
+                        } catch (JsonSyntaxException e) {
+                            e.printStackTrace();
+                            ToSearchActivity.setValue(false);
+                        }
+                    } else {
+                        ToSearchActivity.setValue(false);
                     }
                 } else {
                     ToSearchActivity.setValue(false);
                 }
             }
+
             @Override
             public void onFailure(Call<ApiResponse<LoginResponse>> call, Throwable t) {
                 if (call.isExecuted() && call.request().body() != null) {

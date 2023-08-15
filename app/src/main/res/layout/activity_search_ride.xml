@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="searchViewModel"
+            type="com.example.ridesharecanada.viewmodel.SearchViewModel" />
+    </data>
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -16,7 +23,7 @@
         android:textColorHint="@color/black">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etPass"
+            android:id="@+id/etFrom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/baseline_location_on_24"
@@ -37,7 +44,7 @@
         android:textColorHint="@color/black">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etCpass"
+            android:id="@+id/etTo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/baseline_location_on_24"
@@ -51,6 +58,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:layout_width="match_parent"
+        android:id="@+id/btSearch"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:text="Search"
@@ -62,3 +70,4 @@
         android:layout_margin="10dp"/>
 
 </LinearLayout>
+</layout>

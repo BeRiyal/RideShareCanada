@@ -7,7 +7,7 @@ public class ApiResponse<T> {
     private boolean success;
 
     @SerializedName("data")
-    private T data;
+    private String data;
 
     public void setMessage(String message) {
         this.message = message;
@@ -20,7 +20,7 @@ public class ApiResponse<T> {
         this.success = success;
     }
 
-    public void setData(T data) {
+    public void setData(String data) {
         this.data = data;
     }
 
@@ -28,7 +28,7 @@ public class ApiResponse<T> {
         return success;
     }
 
-    public T getData() {
+    public String getData() {
         return data;
     }
 

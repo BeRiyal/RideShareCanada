@@ -1,7 +1,6 @@
 package com.example.ridesharecanada.APIServices;
 
 import com.example.ridesharecanada.model.API.ApiResponse;
-import com.example.ridesharecanada.model.API.LoginResponse;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
@@ -12,12 +11,12 @@ import java.lang.reflect.Type;
 
 
 
-public class LoginResponseDeserializer implements JsonDeserializer<ApiResponse<LoginResponse>> {
+public class LoginResponseDeserializer implements JsonDeserializer<ApiResponse> {
     @Override
-    public ApiResponse<LoginResponse> deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+    public ApiResponse deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
         JsonObject jsonObject = json.getAsJsonObject();
 
-        ApiResponse<LoginResponse> apiResponse = new ApiResponse<LoginResponse>();
+        ApiResponse apiResponse = new ApiResponse();
 
         if (jsonObject.has("success")) {
             apiResponse.setSuccess(jsonObject.get("success").getAsBoolean());
@@ -29,8 +28,7 @@ public class LoginResponseDeserializer implements JsonDeserializer<ApiResponse<L
 
         if (jsonObject.has("data")) {
             JsonElement dataElement = jsonObject.get("data");
-            LoginResponse data = context.deserialize(dataElement, LoginResponse.class);
-            apiResponse.setData(data);
+            apiResponse.setData(dataElement.toString());
         }
         return apiResponse;
     }

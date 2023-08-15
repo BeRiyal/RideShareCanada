@@ -14,6 +14,8 @@ import com.example.ridesharecanada.model.API.LoginResponse;
 import com.example.ridesharecanada.model.API.RegisterRequest;
 import com.example.ridesharecanada.model.API.RegisterResponse;
 import com.example.ridesharecanada.model.SharedPrefDataSource;
+import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -41,16 +43,29 @@ public class RegistrationActivityViewModel extends ViewModel {
             public void onResponse(Call<ApiResponse<RegisterResponse>> call, Response<ApiResponse<RegisterResponse>> response) {
                 if (response.isSuccessful()) {
                     ApiResponse<RegisterResponse> apiResponse = response.body();
+
                     if (apiResponse.isSuccess()) {
-                        RegisterResponse registerResponse = apiResponse.getData();
-                        SharedPrefDataSource.getInstance().setLoginId(registerResponse.getToken());
-                        Log.d("Riyal","Hiiiii");
-                        ToLoginActivity.setValue(true);
+                       String responseData = apiResponse.getData(); // Assuming apiResponse.getData() returns the JSON string
+                        Gson gson = new Gson();
+                        try {
+                            RegisterResponse registerResponse = gson.fromJson( responseData, RegisterResponse.class);
+
+                            Log.d("Riyal", String.valueOf(registerResponse));
+                            SharedPrefDataSource.getInstance().setLoginId(registerResponse.getToken());
+                            Log.d("Riyal","Hiiiii");
+                            ToLoginActivity.setValue(true);
+                        } catch (JsonSyntaxException e) {
+                            e.printStackTrace();
+                            ToLoginActivity.setValue(false);
+                        }
+
                     }
                 } else {
                     Log.d("Riyal","Huuuuuu");
                     ToLoginActivity.setValue(false);
                 }
+
+
             }
 
             @Override

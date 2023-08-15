@@ -1,8 +1,9 @@
 package com.example.ridesharecanada.model;
 
 public class Ride {
-    User user;
-    Car car;
-    String StartTime,EndTIme;
-    Integer AvailableSeats,BookSeats;
+    String from;
+    String to;
+    String startTime;
+    String date;
+    String availableSeats;
 }

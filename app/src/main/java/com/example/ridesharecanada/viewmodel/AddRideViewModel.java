@@ -9,10 +9,11 @@ import androidx.lifecycle.ViewModel;
 import com.example.ridesharecanada.APIServices.IApiService;
 import com.example.ridesharecanada.APIServices.RetrofitClient;
 import com.example.ridesharecanada.model.API.AddRideRequest;
+import com.example.ridesharecanada.model.API.AddRideResponse;
 import com.example.ridesharecanada.model.API.ApiResponse;
-import com.example.ridesharecanada.model.API.LoginResponse;
-import com.example.ridesharecanada.model.API.RegisterResponse;
 import com.example.ridesharecanada.model.SharedPrefDataSource;
+import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -30,19 +31,35 @@ public class AddRideViewModel extends ViewModel {
 
     public static MutableLiveData<Boolean> addRide(String From, String TO, String Date, String Time, String Seats) {
 
-        MutableLiveData<ApiResponse<LoginResponse>> AddRideResponseLiveData = new MutableLiveData<>();
+        MutableLiveData<ApiResponse<AddRideResponse>> AddRideResponseLiveData = new MutableLiveData<>();
 
         AddRideRequest request = new AddRideRequest(From, TO, Date, Time, Seats, SharedPrefDataSource.getInstance().getLoginId());
-        Call<ApiResponse<RegisterResponse>> call = apiService.addRide(request);
-        call.enqueue(new Callback<ApiResponse<RegisterResponse>>() {
+        Call<ApiResponse<AddRideResponse>> call = apiService.addRide(request);
+        call.enqueue(new Callback<ApiResponse<AddRideResponse>>() {
+
             @Override
-            public void onResponse(Call<ApiResponse<RegisterResponse>> call, Response<ApiResponse<RegisterResponse>> response) {
+            public void onResponse(Call<ApiResponse<AddRideResponse>> call, Response<ApiResponse<AddRideResponse>> response) {
+                Log.d("Riyal", String.valueOf(response));
                 if (response.isSuccessful()) {
-                    ApiResponse<RegisterResponse> apiResponse = response.body();
+                    ApiResponse<AddRideResponse> apiResponse = response.body();
+                    Log.d("Riyal", String.valueOf(apiResponse));
                     if (apiResponse.isSuccess()) {
-                        RegisterResponse registerResponse = apiResponse.getData();
-                        SharedPrefDataSource.getInstance().setLoginId(registerResponse.getToken());
-                        Log.d("Riyal","Hiiiii");
+                        String responseData = apiResponse.getData(); // Assuming apiResponse.getData() returns the JSON string
+                        Log.d("Riyal", String.valueOf(responseData));
+                        Gson gson = new Gson();
+
+                        try {
+
+                            AddRideResponse loginResponse = gson.fromJson( responseData, AddRideResponse.class);
+
+                            Log.d("Riyal", String.valueOf(loginResponse));
+                        } catch (JsonSyntaxException e) {
+                            e.printStackTrace();
+                            Log.d("Riyal", "Hi catch");
+                        }
+
+
+
                     }
                 } else {
                     Log.d("Riyal","Huuuuuu");
@@ -50,8 +67,8 @@ public class AddRideViewModel extends ViewModel {
             }
 
             @Override
-            public void onFailure(Call<ApiResponse<RegisterResponse>> call, Throwable t) {
-
+            public void onFailure(Call<ApiResponse<AddRideResponse>> call, Throwable t) {
+                Log.d("Riyal", "Hi fail");
             }
         });
 

@@ -1,7 +1,6 @@
 package com.example.ridesharecanada.APIServices;
 
 import com.example.ridesharecanada.model.API.ApiResponse;
-import com.example.ridesharecanada.APIServices.LoginResponseDeserializer;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
