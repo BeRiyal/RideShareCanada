@@ -17,7 +17,7 @@ public class AddRideRequest {
     @SerializedName("availableSeats")
     String Seats;
 
-    public AddRideRequest(String from, String to, String date, String time, String seats,String driverId) {
+    public AddRideRequest(String driverId,String from, String to, String date, String time, String seats) {
         this.From = from;
         this.To = to;
         this.Date = date;
@@ -27,11 +27,11 @@ public class AddRideRequest {
     }
 
 
-    public String getUid() {
+    public String getDid() {
         return DriverId;
     }
 
-    public void setUid(String driverId) {
+    public void setDid(String driverId) {
         DriverId = driverId;
     }
 

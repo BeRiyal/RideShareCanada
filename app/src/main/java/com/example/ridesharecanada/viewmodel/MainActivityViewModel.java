@@ -75,6 +75,7 @@ public class MainActivityViewModel extends ViewModel {
                 }
             }
         });
+
         return ToSearchActivity;
     }
 

@@ -29,11 +29,8 @@ public class AddRideViewModel extends ViewModel {
         CheckSession();
     }
 
-    public static MutableLiveData<Boolean> addRide(String From, String TO, String Date, String Time, String Seats) {
-
-        MutableLiveData<ApiResponse<AddRideResponse>> AddRideResponseLiveData = new MutableLiveData<>();
-
-        AddRideRequest request = new AddRideRequest(From, TO, Date, Time, Seats, SharedPrefDataSource.getInstance().getLoginId());
+    public static MutableLiveData<Boolean> addRide(String Did,String From, String TO, String Date, String Time, String Seats) {
+        AddRideRequest request = new AddRideRequest(Did,From, TO, Date, Time, Seats);
         Call<ApiResponse<AddRideResponse>> call = apiService.addRide(request);
         call.enqueue(new Callback<ApiResponse<AddRideResponse>>() {
 

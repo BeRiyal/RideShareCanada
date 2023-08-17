@@ -27,10 +27,16 @@ public class RidesViewModel extends ViewModel {
     Context context;
 
     public MutableLiveData<ApiResponse<SearchResponse>> getRideArray() {
+        Log.d("Riyal","Into GetRideArray");
+        Log.d("Riyal", RideArray.toString());
         return RideArray;
     }
 
-    MutableLiveData<ApiResponse<SearchResponse>> RideArray;
+    public void setRideArray(MutableLiveData<ApiResponse<SearchResponse>> rideArray) {
+        this.RideArray = rideArray;
+    }
+
+    public static MutableLiveData<ApiResponse<SearchResponse>> RideArray;
 
     static IApiService apiService;
     public RidesViewModel(Context context) {
@@ -39,7 +45,7 @@ public class RidesViewModel extends ViewModel {
     }
     public static MutableLiveData<ApiResponse<SearchResponse>> search(String from, String to) {
 
-        MutableLiveData<ApiResponse<SearchResponse>> SearchResponseLiveData = new MutableLiveData<>();
+        RideArray = new MutableLiveData<>();
 
         SearchRideRequest searchRequest = new SearchRideRequest(from,to);
         Call<ApiResponse<SearchResponse>> call = apiService.searchRide(searchRequest);
@@ -51,57 +57,33 @@ public class RidesViewModel extends ViewModel {
                 if (apiResponse.isSuccess()) {
                     String responseData = apiResponse.getData(); // Assuming apiResponse.getData() returns the JSON string
                     Log.d("Riyal", String.valueOf(responseData));
-//                    Gson gson = new Gson();
-//                    try {
-//                        SearchResponse searchResponse = gson.fromJson( responseData, SearchResponse.class);
-//
-//                        Log.d("Riyal", String.valueOf(searchResponse));
-//                        Log.d("Riyal","Hiiiii");
-//                    } catch (JsonSyntaxException e) {
-//                        Log.d("Riyal", String.valueOf(e));
-//                        e.printStackTrace();
-//                    }
-
                     Gson gson = new Gson();
                     try {
                         Log.d("Riyal", "Response Data: " + responseData); // Debug print
                         Type responseType = new TypeToken<List<SearchResponse.RideData>>() {}.getType();
                         List<SearchResponse.RideData> rideList = gson.fromJson(responseData, responseType);
-
                         for (SearchResponse.RideData ride : rideList) {
                             Log.d("Riyal", "Ride ID: " + ride.getId());
                             Log.d("Riyal", "From: " + ride.getFrom());
                             Log.d("Riyal", "To: " + ride.getTo());
-                            // Print other properties as needed
                         }
-
-                        Log.d("Riyal", "Successfully deserialized");
+                        RideArray.postValue(apiResponse);
                     } catch (JsonSyntaxException e) {
-                        Log.e("Riyal", "Error during deserialization: " + e.getMessage());
                         e.printStackTrace();
                     }
-
-
-
                 }
                 else {
-                    Log.d("Riyal", "Huuuuuu");
                 }
             }
-
             @Override
             public void onFailure(Call<ApiResponse<SearchResponse>> call, Throwable t) {
-                Log.d("Riyal","ohoooooooooooooooo");
-
             }
         });
-        return SearchResponseLiveData;
+        return RideArray;
     }
 
     public void searchTrigger(String searchFrom, String searchTo) {
-        Log.d("Riyal",searchFrom);
-        Log.d("Riyal",searchTo);
         RideArray = search(searchFrom,searchTo);
-        Log.d("Riyal", String.valueOf(RideArray));
+        Log.d("Riyal",RideArray.toString());
     }
 }

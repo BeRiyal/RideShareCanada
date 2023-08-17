@@ -5,6 +5,8 @@ import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ridesharecanada.R;
 import com.example.ridesharecanada.databinding.ActivityRidesBinding;
@@ -14,6 +16,8 @@ import com.example.ridesharecanada.viewmodel.RidesViewModel;
 public class RidesActivity extends AppCompatActivity {
 
 
+    private RecyclerView recyclerView;
+    private RideAdapter adapter;
     ActivityRidesBinding binding;
     RidesViewModel ridesViewModel;
     @Override
@@ -27,10 +31,14 @@ public class RidesActivity extends AppCompatActivity {
         ridesViewModel.searchTrigger(SharedPrefDataSource.getInstance().getSearchFrom(), SharedPrefDataSource.getInstance().getSearchTo());
 
         ridesViewModel.getRideArray().observe(this,array -> {
-
-            Log.d("Riyal", "String.valueOf(Arrays.asList(array).indexOf(0)");
+            Log.d("Riyal at oncreate rvm", array.getData());
+            adapter.setItems(array.getData());
         });
 
+        recyclerView = binding.rvRides;
+        adapter = new RideAdapter();
 
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adapter);
     }
 }

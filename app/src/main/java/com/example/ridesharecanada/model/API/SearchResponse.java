@@ -69,6 +69,17 @@ public class SearchResponse {
         @SerializedName("_id")
         private String id;
 
+        public String getDriverId() {
+            return driverId;
+        }
+
+        public void setDriverId(String driverId) {
+            this.driverId = driverId;
+        }
+
+        @SerializedName("driverId")
+        private String driverId;
+
         @SerializedName("from")
         private String from;
 

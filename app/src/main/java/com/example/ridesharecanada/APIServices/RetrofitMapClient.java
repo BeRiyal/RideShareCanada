@@ -1,6 +1,6 @@
 package com.example.ridesharecanada.APIServices;
 
-import com.example.ridesharecanada.model.API.ApiResponse;
+import com.example.ridesharecanada.model.API.DirectionsResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -9,8 +9,9 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class RetrofitClient {
-    private static final String BASE_URL = "https://ridesharecanadaapi.onrender.com";
+public class RetrofitMapClient {
+
+    private static final String BASE_URL = "https://maps.googleapis.com/maps/api/";
     private static Retrofit retrofit;
 
     public static Retrofit getInstance() {
@@ -24,7 +25,7 @@ public class RetrofitClient {
 
             Gson gson = new GsonBuilder()
                     .setLenient()
-                    .registerTypeAdapter(ApiResponse.class, new LoginResponseDeserializer())
+                    .registerTypeAdapter(DirectionsResponse.class, new DirectionsDeserializer())
                     .create();
 
             retrofit = new Retrofit.Builder()
@@ -32,6 +33,7 @@ public class RetrofitClient {
                     .client(client)  // Set the custom OkHttpClient with the logging interceptor
                     .addConverterFactory(GsonConverterFactory.create(gson))
                     .build();
+
         }
         return retrofit;
     }

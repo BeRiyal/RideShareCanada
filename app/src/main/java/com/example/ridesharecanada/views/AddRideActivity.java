@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil;
 
 import com.example.ridesharecanada.R;
 import com.example.ridesharecanada.databinding.ActivityAddRideBinding;
+import com.example.ridesharecanada.model.SharedPrefDataSource;
 import com.example.ridesharecanada.viewmodel.AddRideViewModel;
 
 public class AddRideActivity extends AppCompatActivity {
@@ -25,7 +26,7 @@ public class AddRideActivity extends AppCompatActivity {
         binding.btnAddRide.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AddRideViewModel.addRide(binding.etFrom.getText().toString(),binding.etTo.getText().toString(),binding.etDate.getText().toString(),binding.etTime.getText().toString(),binding.etSeat.getText().toString());
+                AddRideViewModel.addRide(SharedPrefDataSource.getInstance().getLoginId(),binding.etFrom.getText().toString(),binding.etTo.getText().toString(),binding.etDate.getText().toString(),binding.etTime.getText().toString(),binding.etSeat.getText().toString());
             }
         });
 

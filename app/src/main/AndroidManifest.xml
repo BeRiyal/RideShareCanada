@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -14,6 +16,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RideShareCanada"
         tools:targetApi="31">
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBFcykIv0WwZmbt3WAW96FaSAee8OwSKxw" />
+
+
+        <activity
+            android:name=".views.RideBookingActivity"
+            android:exported="false" >
+        </activity>
         <activity
             android:name=".views.DrawableBaseActivity"
             android:exported="false" />
