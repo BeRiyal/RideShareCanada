@@ -1,7 +1,6 @@
 package com.example.ridesharecanada.views;
 
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,17 +17,20 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.List;
 
-public class RideAdapter extends RecyclerView.Adapter <RideAdapter.RideViewHolder> {
+public class RideAdapter extends RecyclerView.Adapter<RideAdapter.RideViewHolder> {
 
-    private  List<SearchResponse.RideData> rideDataList;
+    private List<SearchResponse.RideData> rideDataList;
 
+    // Creating view holder by inflating the ride layout
+    @NonNull
     @Override
     public RideViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.ride, parent, false);
         return new RideViewHolder(itemView, new onItemClickListener() {
             @Override
             public void onRecyclerItemClick(View view, int position) {
-                Intent i = new Intent(view.getContext(),RideBookingActivity.class);
+                // Handling click event to start RideBookingActivity with ride details
+                Intent i = new Intent(view.getContext(), RideBookingActivity.class);
                 i.putExtra("From", rideDataList.get(position).getFrom());
                 i.putExtra("To", rideDataList.get(position).getTo());
                 i.putExtra("Date", rideDataList.get(position).getDate());
@@ -40,56 +42,52 @@ public class RideAdapter extends RecyclerView.Adapter <RideAdapter.RideViewHolde
         });
     }
 
+    // Binding data to the view holder
     @Override
     public void onBindViewHolder(@NonNull RideAdapter.RideViewHolder holder, int position) {
         SearchResponse.RideData ride = rideDataList.get(position);
         holder.bind(ride);
     }
 
+    // Getting the count of items in the data list
     @Override
     public int getItemCount() {
-        if(rideDataList==null){
-            Log.d("riyal","empty Array");
-            return 0;
-        }
-        else {
-            Log.d("riyal", String.valueOf(rideDataList.size()));
-            return rideDataList.size();
-        }
+        return rideDataList == null ? 0 : rideDataList.size();
     }
+
+    // Updating the adapter with new ride data
     public void setItems(String rides) {
         Gson gson = new Gson();
-        Type responseType = new TypeToken<List<SearchResponse.RideData>>() {}.getType();
+        Type responseType = new TypeToken<List<SearchResponse.RideData>>() {
+        }.getType();
         List<SearchResponse.RideData> rideList = gson.fromJson(rides, responseType);
-        for (SearchResponse.RideData ride : rideList) {
-            Log.d("Riyal", "Ride ID: " + ride.getId());
-            Log.d("Riyal", "From: " + ride.getFrom());
-            Log.d("Riyal", "To: " + ride.getTo());
-            Log.d("Riyal", "Driver: " + ride.getDriverId());
-        }
 
-        this.rideDataList  = rideList;
-
+        // Update the internal ride data list and notify the adapter of the change
+        this.rideDataList = rideList;
         notifyDataSetChanged();
     }
+
+    // View holder for the recycler view
     public class RideViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         public onItemClickListener mListener;
 
-        private TextView rideFromTextView,rideToTextView,rideDateTextView,rideTimeTextView,rideDriverTextView,rideSeatsTextView;
+        private TextView rideFromTextView, rideToTextView, rideDateTextView, rideTimeTextView, rideDriverTextView, rideSeatsTextView;
+
         public RideViewHolder(@NonNull View rideView, onItemClickListener listener) {
             super(rideView);
-            rideFromTextView =rideView.findViewById(R.id.tvFrom);
+            rideFromTextView = rideView.findViewById(R.id.tvFrom);
             rideToTextView = rideView.findViewById(R.id.tvTo);
             rideDateTextView = rideView.findViewById(R.id.tvDate);
             rideTimeTextView = rideView.findViewById(R.id.tvTime);
             rideDriverTextView = rideView.findViewById(R.id.tvDriver);
             rideSeatsTextView = rideView.findViewById(R.id.tvSeats);
 
-            mListener =listener;
+            mListener = listener;
             rideView.setOnClickListener(this);
         }
 
+        // Binding ride data to the view holder
         void bind(SearchResponse.RideData ride) {
             rideFromTextView.setText(ride.getFrom());
             rideToTextView.setText(ride.getTo());
@@ -99,9 +97,15 @@ public class RideAdapter extends RecyclerView.Adapter <RideAdapter.RideViewHolde
             rideSeatsTextView.setText(ride.getAvailableSeats());
         }
 
+        // Handling click events on the recycler view items
         @Override
         public void onClick(View v) {
-            mListener.onRecyclerItemClick(v, getPosition());
+            mListener.onRecyclerItemClick(v, getAdapterPosition());
         }
+    }
+
+    // Interface to handle item click events
+    public interface onItemClickListener {
+        void onRecyclerItemClick(View view, int position);
     }
 }

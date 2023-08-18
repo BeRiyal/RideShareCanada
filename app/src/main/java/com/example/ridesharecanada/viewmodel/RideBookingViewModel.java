@@ -50,11 +50,11 @@ public class RideBookingViewModel extends ViewModel{
             @Override
             public void onResponse(Call<DirectionsResponse> call, Response<DirectionsResponse> response) {
                 DirectionsResponse apiResponse = response.body();
-                 Log.d("Riyal OnResponse", String.valueOf(apiResponse));
+                Log.d("Riyal OnResponse", String.valueOf(apiResponse));
                 Log.d("Riyal OnResponse", String.valueOf(apiResponse));
 
-                 MapApiResponse.setValue(apiResponse);
-             //    MapApiResponse.postValue(apiResponse);
+                MapApiResponse.setValue(apiResponse);
+                //    MapApiResponse.postValue(apiResponse);
                 Log.d("Riyal OnResponse after post value", String.valueOf(apiResponse));
             }
 

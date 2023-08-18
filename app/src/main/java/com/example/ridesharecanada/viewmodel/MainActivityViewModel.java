@@ -25,6 +25,12 @@ public class MainActivityViewModel extends ViewModel {
     private MutableLiveData<Boolean> ToRegistrationActivity = new MutableLiveData<>();
     private MutableLiveData<Boolean> ToForgotPassActivity = new MutableLiveData<>();
     private static MutableLiveData<Boolean> ToSearchActivity = new MutableLiveData<>();
+
+    public static MutableLiveData<String> getWrongCredential() {
+        return WrongCredential; // for credential error
+    }
+
+    private static MutableLiveData<String> WrongCredential = new MutableLiveData<>();
     private Context context;
 
     public MainActivityViewModel(Context applicationContext) {
@@ -49,7 +55,6 @@ public class MainActivityViewModel extends ViewModel {
                         Gson gson = new Gson();
                         try {
                             LoginResponse loginResponse = gson.fromJson(responseData, LoginResponse.class);
-                            Log.d("Riyal", String.valueOf(loginResponse));
                             SharedPrefDataSource.getInstance().setLoginId(loginResponse.getToken());
                             ToSearchActivity.setValue(true);
                         } catch (JsonSyntaxException e) {
@@ -57,9 +62,12 @@ public class MainActivityViewModel extends ViewModel {
                             ToSearchActivity.setValue(false);
                         }
                     } else {
+
+                        WrongCredential.setValue("Hello");
                         ToSearchActivity.setValue(false);
                     }
-                } else {
+                }
+                else {
                     ToSearchActivity.setValue(false);
                 }
             }
@@ -75,7 +83,6 @@ public class MainActivityViewModel extends ViewModel {
                 }
             }
         });
-
         return ToSearchActivity;
     }
 
@@ -90,12 +97,12 @@ public class MainActivityViewModel extends ViewModel {
         return ToSearchActivity;
     }
     public void ToRegistration() {
-        ToRegistrationActivity.setValue(true); // Trigger navigation
+        ToRegistrationActivity.setValue(true); // Trigger navigation to register
     }
     public void ToForgotPass() {
-        ToForgotPassActivity.setValue(true); // Trigger navigation
+        ToForgotPassActivity.setValue(true); // Trigger navigation to forgetpassword page
     }
     public void CheckSession() {
-        ToSearchActivity.setValue(SharedPrefDataSource.getInstance().getLoginId() != null); // Trigger navigation
+        ToSearchActivity.setValue(SharedPrefDataSource.getInstance().getLoginId() != null); // Check for session
     }
 }

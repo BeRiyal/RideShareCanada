@@ -15,7 +15,6 @@ import com.example.ridesharecanada.viewmodel.RidesViewModel;
 
 public class RidesActivity extends AppCompatActivity {
 
-
     private RecyclerView recyclerView;
     private RideAdapter adapter;
     ActivityRidesBinding binding;

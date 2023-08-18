@@ -2,4 +2,19 @@
     <string name="app_name">RideShareCanada</string>
     <string name="drawer_open">Drawer Open</string>
     <string name="drawer_close">Drawer Close</string>
+    <string name="profile_image">Profile Image</string>
+    <string name="id_8876602">Id: 8876602</string>
+    <string name="swapnil_more">Swapnil More</string>
+    <string name="developer">Developer</string>
+    <string name="riyal_patel">Riyal Patel</string>
+    <string name="email_rpatel5885_conestogac_on_ca">Email: Rpatel5885@conestogac.on.ca</string>
+    <string name="id_8855884">Id: 8855884</string>
+    <string name="email_smore6602_conestogac_on_ca">Email: Smore6602@conestogac.on.ca</string>
+    <string name="logo">Logo</string>
+    <string name="email">Email</string>
+    <string name="login">Login</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="password">Password</string>
+    <string name="signup">Signup</string>
+    <string name="meet_devs">meet Devs</string>
 </resources>
