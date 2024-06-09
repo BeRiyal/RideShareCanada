@@ -22,7 +22,7 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyBFcykIv0WwZmbt3WAW96FaSAee8OwSKxw" />
+            android:value="AIzaSyBFcykIv0WwZmbt3WBW96FaSAee8OwSKxw" />
 
         <activity
             android:name=".views.RideBookingActivity"
