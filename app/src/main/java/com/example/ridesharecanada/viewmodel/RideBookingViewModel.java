@@ -24,7 +24,7 @@ public class RideBookingViewModel extends ViewModel{
     static DirectionsService directionService;
 
     public static MutableLiveData<DirectionsResponse> getMapApiResponse() {
-        Log.d("Riyal in get map api", String.valueOf(MapApiResponse));
+        Log.d("in get map api", String.valueOf(MapApiResponse));
         return MapApiResponse;
     }
 
@@ -42,7 +42,7 @@ public class RideBookingViewModel extends ViewModel{
 
         MapApiResponse = new MutableLiveData<>();
 
-        String apiKey = "AIzaSyBFcykIv0WwZmbt3WAW96FaSAee8OwSKxw";
+        String apiKey = "AIzaSyBFcykIv0WwZmbt3WBW96FaSAee8OwSKxw";
         Call<DirectionsResponse> call = directionService.getDirections(origin,destination,apiKey);
         Log.d("Riyal before call", String.valueOf(call));
 
